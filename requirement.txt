@@ -1,1 +1,2 @@
-Flask==0.12.2
+flask==1.0.2
+Flash-PyMongo==2.1.0
