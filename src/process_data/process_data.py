@@ -34,10 +34,10 @@ def push_data_from_file(filename):
 
     Read data from a JSON file, and then upload
     all the data to MongoDB. If there is a course
-    in database having same quarter, year, and
+    in the database having the same quarter, year, and
     CRN, the program will update the course.
     Otherwise, the program will insert a new
-    course into database.
+    course into the database.
 
     Args:
         filename: str, the name of JSON file
@@ -59,9 +59,9 @@ def push_data_from_file(filename):
 def push_data_to_mongodb(json_dict):
     """Create/update data to MongoDB from raw data
 
-    If there is a course in database having same quarter,
+    If there is a course in database having the same quarter,
     year, and CRN, the program will update the course.
-    Otherwise, the program will insert a new course into
+    Otherwise, the program will insert a new course into the
     database.
 
     Args:
@@ -107,7 +107,7 @@ def push_data_to_mongodb(json_dict):
                 current = my_collection.find(my_query)
                 # check if the course exists in database
                 if current.count() == 0:
-                    # the course doesn't exist in database, insert it
+                    # if the course doesn't exist in database, insert it
                     item = {
                             "ID": unique_id,
                             "Term": catalog_info,
@@ -138,7 +138,7 @@ def push_data_to_mongodb(json_dict):
 
                 else:
                     current = [i for i in current]
-                    # the course exists in db, update it
+                    # if the course exists in db, update it
                     new_value = {"$set": {"Cap": current[0]["Cap"] + [int(course['Cap'])],
                                           "Act": current[0]["Act"] + [int(course["Act"])],
                                           "WL Cap": current[0]["WL Cap"] + [int(course["WL Cap"])],
